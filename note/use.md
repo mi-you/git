@@ -45,14 +45,14 @@
 	git reflog // Git提供了一个命令git reflog用来记录你的每一次命令
 	```
 
-》工作区和暂存区
+## 工作区和暂存区
 	Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。
 	第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
 	第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支	
 	因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。
-》管理修改
+## 管理修改
 	下面，我们要讨论的就是，为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
-》撤销修改
+## 撤销修改
 	》git checkout -- readme.txt //对于加入暂存区
 	新版本(2.23)的还可以使用：git restore readme.txt
 	命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
@@ -63,12 +63,12 @@
 	》git reset HEAD readme.txt //对于加入到本地仓库
 	新版本(2.23)的还可以使用：git restore --staged readme.txt
 	git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区
-》删除文件
+## 删除文件
 	》git rm test.txt
 	rm 'test.txt'
 	先手动删除文件，然后使用git rm <file>和git add<file>效果是一样的。
-》》》远程仓库
-》添加远程库
+# 远程仓库
+## 添加远程库
 	网站上的是关于github使用ssh的一些讲解
 	创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，
 	可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
@@ -76,20 +76,20 @@
 	把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
 	由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，
 	还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
-》从远程库克隆
+## 从远程库克隆
 	》git clone git@github.com:mi-you/testtt.git
 	GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。
 	实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
 	使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
 	Git支持多种协议，包括https，但ssh协议速度最快。
-》》》分支管理
+# 分支管理
 	分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码还没写完，
 	不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
 	现在有了分支，就不用怕了。你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，
 	想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。其他版本控制系统如SVN等都有分支管理，
 	但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。
 	但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
-》创建与合并分支
+## 创建与合并分支
 	Git鼓励大量使用分支：
 	查看分支：git branch
 	创建分支：git branch <name>
@@ -97,7 +97,7 @@
 	创建+切换分支：git checkout -b <name>或者git switch -c <name>
 	合并某分支到当前分支：git merge <name>
 	删除分支：git branch -d <name>
-》解决冲突
+## 解决冲突
 	》git switch -c feature1
 	》修改test.txt的第一行
 	》git add test.txt
@@ -112,11 +112,11 @@
 	打开test.txt文件解决冲突
 	》git add test.txt
 	》git commit -m'merge'
-》分支管理策略
+## 分支管理策略
 	》git merge --no-ff -m "merge with no-ff" dev
 	因为本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
-	合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并
-》bug分支
+	合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来3曾经做过合并
+## bug分支
 	在Git中，由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除
 	当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支issue-101来修复它，但是，等等，当前正在dev上进行的工作还没有提交
 	》git status
@@ -145,7 +145,7 @@
 	如果同样的bug在dev上也有,除了重复操作一次还可以使用git cherry-pick 让我们能复制一个特定的提交到当前分支
 	》git branch dev
 	》git cherry-pick 4c805e2
-》feature分支
+## feature分支
 	软件开发中，总有无穷无尽的新的功能要不断添加进来。添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，
 	所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。
 	现在，你终于接到了一个新任务：开发代号为Vulcan的新功能，该功能计划用于下一代星际飞船
@@ -156,7 +156,7 @@
 	》这时突然不要这个了
 	》git branch -d feature-vulcan
 	》git branch -D feature-vulcan //如果上面的删除失败就把-d改为-D强制删除
-》多人协作
+## 多人协作
 	当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。
 	》git remote //查看远程库的信息
 	》git remote -v // 显示更详细的信息
@@ -173,12 +173,12 @@
 	没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
 	如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
 	这就是多人协作的工作模式，一旦熟悉了，就非常简单。
-》rebase
+## rebase
 	》git rebase
 	rebase操作的特点：把分叉的提交历史“整理”成一条直线，看上去更直观。缺点是本地的分叉提交已经被修改过了
 	》
-》》》标签管理
-》创建标签
+# 标签管理
+## 创建标签
 	在Git中打标签非常简单，首先，切换到需要打标签的分支上,然后，敲命令git tag <name>就可以打一个新标签
 	》git switch dev
 	》git tag v1.0 //v1.0标签
@@ -193,7 +193,7 @@
 	》git tag -a v0.1 -m'version 0.1 released'
 	标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，
 	那么在这两个分支上都可以看到这个标签。
-》操作标签
+## 操作标签
 	》git tag -d v0.1 //删除标签
 	因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
 	如果要推送某个标签到远程，使用命令git push origin <tagname>：
@@ -204,9 +204,9 @@
 	》git tag -d v0.9
 	然后，从远程删除。删除命令也是push，但是格式如下：
 	》git push origin :refs/tags/v0.9
-》》》自定义git
+# 自定义git
 	》git config --global color.ui true //这样，Git会适当地显示不同的颜色
-》忽略特殊文件
+## 忽略特殊文件
 	在Git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去
 	GitHub已经为我们准备了各种配置文件，只需要组合一下就可以使用了。
 	所有配置文件可以直接在线浏览：https://github.com/github/gitignore
@@ -220,14 +220,11 @@
 	# 不排除.gitignore和App.class:
 	!.gitignore
 	!App.class
-》配置别名
+## 配置别名
 	》$ git config --global alias.st status
 	--global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。如果不加，那只针对当前的仓库起作用
 	git st === git status
 	》git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-》搭建git服务器
-》》》使用sourceTree
-》》》期末总结
 	
 	
 	
