@@ -53,11 +53,12 @@
 - 因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。
 ## 管理修改
 - 下面，我们要讨论的就是，为什么Git比其他版本控制系统设计得优秀，因为Git跟踪并管理的是修改，而非文件。
-## 撤销修改
+## [撤销修改](https://zhuanlan.zhihu.com/p/259385054?utm_source=wechat_session)
 - `git restore [--worktree] aaa` : 从staged中恢复aaa到worktree 
 - `git restore --staged aaa` : 从repo中恢复aaa到staged 
 - `git restore --staged --worktree aaa` : 从repo中恢复aaa到staged和worktree 
 - `git restore --source dev aaa` : 从指定commit中恢复aaa到worktree
+![restore](./restore.jpg)
 - 旧版本命令
 	```javascript
 	/*
