@@ -89,12 +89,12 @@
 分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码还没写完，	不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。	现在有了分支，就不用怕了。你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，	想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。其他版本控制系统如SVN等都有分支管理，	但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。	但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
 ## 创建与合并分支
 	Git鼓励大量使用分支：
-- 查看分支：git branch
-- 创建分支：git branch <name>
-- 切换分支：git switch <name> // 旧 git checkout <name>
--	创建+切换分支：git switch -c <name> // 旧 git checkout -b <name>
-- 合并某分支到当前分支：git merge <name>
--	删除分支：git branch -d <name>
+- 查看分支：`git branch`
+- 创建分支：`git branch <name>`
+- 切换分支：`git switch <name>` // 旧 `git checkout <name>`
+-	创建+切换分支：`git switch -c <name>` // 旧 `git checkout -b <name>`
+- 合并某分支到当前分支：`git merge <name>`
+-	删除分支：`git branch -d <name>`
 ## 解决冲突
 1. git switch -c feature1
 2. 修改test.txt的第一行
@@ -160,7 +160,7 @@ git stash list
 			 git stash drop 删除stash内容
 		2. git stash pop，恢复的同时把stash内容也删了
 
-		git stash apply stach@{0} //恢复指定的stash
+		git stash apply stash@{0} //恢复指定的stash
 */ 
 git stash pop
 ```
